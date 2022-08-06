@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fplugin GHC.TypeLits.Normalise #-}
+{-# OPTIONS_GHC -fplugin Polysemy.Plugin #-}
 
 module Bug where
 

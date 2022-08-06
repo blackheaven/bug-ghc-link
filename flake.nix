@@ -22,6 +22,9 @@
         haskellPackages = pkgs.haskell.packages.ghc923.override {
           overrides = hself: hsuper: {
             nfc = jailbreakUnbreak hsuper.nfc;
+            polysemy = hsuper.polysemy_1_7_1_0;
+            polysemy-plugin = hsuper.polysemy-plugin_0_4_3_1;
+            type-errors = jailbreakUnbreak hsuper.type-errors;
           };
         };
       in
