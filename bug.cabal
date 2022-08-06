@@ -18,7 +18,7 @@ library
       base == 4.*
     , polysemy
     , polysemy-plugin
-    , nfc
+    , pulsar-client-hs
   hs-source-dirs: src
   exposed-modules:
       Bug

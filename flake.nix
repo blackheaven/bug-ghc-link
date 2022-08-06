@@ -20,12 +20,22 @@
           pkgs.haskell.lib.doJailbreak (pkgs.haskell.lib.dontCheck (pkgs.haskell.lib.unmarkBroken pkg));
 
         haskellPackages = pkgs.haskell.packages.ghc923.override {
-          overrides = hself: hsuper: {
-            nfc = jailbreakUnbreak hsuper.nfc;
-            polysemy = hsuper.polysemy_1_7_1_0;
-            polysemy-plugin = hsuper.polysemy-plugin_0_4_3_1;
-            type-errors = jailbreakUnbreak hsuper.type-errors;
-          };
+          overrides = hself: hsuper:
+            let
+              pulsarHsSrc = github "hetchr" "pulsar-hs"
+                "131052da2a59d5d67189905331df150403820bd1" "0nihb1gxy2dxspsyhihdrvxrylci50liq5lpkncz05r0z1bza0sk";
+              pulsarHs = import "${pulsarHsSrc}/pulsar-client-hs" {
+                nixpkgs = pkgs;
+                compiler = "ghc923";
+              };
+            in
+            {
+              nfc = jailbreakUnbreak hsuper.nfc;
+              polysemy = hsuper.polysemy_1_7_1_0;
+              polysemy-plugin = hsuper.polysemy-plugin_0_4_3_1;
+              type-errors = jailbreakUnbreak hsuper.type-errors;
+              pulsar-client-hs = jailbreakUnbreak pulsarHs.pulsar-client-hs;
+            };
         };
       in
       rec
